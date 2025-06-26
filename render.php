@@ -1,38 +1,4 @@
 <?php
-// if (!function_exists('get_field')) {
-//     echo '<p><em>ACF no está activo.</em></p>';
-//     return;
-// }
-
-// $post_id = get_the_ID();
-// $fields = get_fields($post_id);
-
-// if (!$fields) {
-//     echo '<p><em>No hay campos ACF disponibles para este bloque.</em></p>';
-//     return;
-// }
-
-// echo '<div class="acf-block-render">';
-
-// foreach ($fields as $key => $valor) {
-//     if (is_array($valor)) {
-//         echo '<p><strong>' . esc_html($key) . ':</strong></p><ul>';
-//         foreach ($valor as $item) {
-//             echo '<li>' . esc_html(is_array($item) ? json_encode($item) : $item) . '</li>';
-//         }
-//         echo '</ul>';
-//     } elseif (wp_http_validate_url($valor)) {
-//         echo '<p><strong>' . esc_html($key) . ':</strong> <a href="' . esc_url($valor) . '">' . esc_html($valor) . '</a></p>';
-//     } elseif (preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $valor)) {
-//         echo '<p><strong>' . esc_html($key) . ':</strong><br><img src="' . esc_url($valor) . '" style="max-width:100%; height:auto;" /></p>';
-//     } else {
-//         echo '<p><strong>' . esc_html($key) . ':</strong> ' . esc_html($valor) . '</p>';
-//     }
-// }
-
-// echo '</div>';
-
-<?php
 if (!function_exists('get_field')) {
     echo '<p><em>ACF no está activo.</em></p>';
     return;

@@ -1,77 +1,136 @@
-.dbb-icon{
-    margin-bottom: 15px;
+.form-check.form-switch.d-flex{
+    margin-bottom: .500em;
 }
-.dbb-icon-tabs {
+.form-switch .form-check-input{
+    margin-top: 5px;
+    background-repeat: no-repeat;
+}
+
+/* APLICAR SOLO DENTRO DE TU PLUGIN */
+#dbb-admin-root {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Inputs */
+#dbb-admin-root .form-control {
+display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/* Selects */
+#dbb-admin-root .form-select {
+--bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/* Labels */
+#dbb-admin-root .form-label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Listado de bloques */
+#dbb-admin-root .dbb-block-item {
+  padding: 12px 16px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background: #f9f9f9;
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.components-button {
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s;
+/* Icono Dashicon dentro de listado */
+#dbb-admin-root .dbb-block-item .dashicons {
+  font-size: 18px;
+  vertical-align: middle;
 }
 
-.components-button.is-pressed {
-  background: #007cba;
-  color: #fff;
-  border-color: #007cba;
+/* Modal */
+#dbb-admin-root .dbb-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.components-button:hover {
-  background: #e2e2e2;
+#dbb-admin-root .dbb-modal-content {
+  background: white;
+  padding: 20px;
+  width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
 }
 
-.dbb-icon-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-  gap: 10px;
+/* Sección de iconos */
+#dbb-admin-root .dbb-icon {
+  margin-bottom: 1rem;
+}
+
+#dbb-admin-root .dbb-icon-tabs {
+  margin-bottom: 10px;
+}
+
+#dbb-admin-root .dbb-icon-grid {
+  display: flex;
+  flex-wrap: wrap;
   max-height: 300px;
   overflow-y: auto;
+  border: 1px solid #eee;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fafafa;
+  border-radius: 4px;
+  background-color: #fff;
 }
 
-.dbb-icon-item {
-  text-align: center;
-  padding: 6px;
+#dbb-admin-root .dbb-icon-item {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
   border: 1px solid transparent;
-  border-radius: 6px;
   cursor: pointer;
-  transition: border 0.2s, background 0.2s;
+  border-radius: 4px;
 }
-
-.dbb-icon-item:hover {
-  background: #f5f5f5;
-  border-color: #bbb;
-}
-
-.dbb-icon-item.selected {
-  border-color: #007cba;
-  background: #e7f3fa;
-}
-
-.dbb-section-title {
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1d2327;
-}
-
-.acf-block {
-  padding: 20px;
-  border: 1px dashed #ccc;
-  margin-bottom: 20px;
-  background: #fafafa;
-}
-
-.acf-block .acf-field {
-  margin-bottom: 15px;
+#dbb-admin-root .dbb-icon-item:hover {
+  border-color: #007bff;
+  background-color: #f0f8ff;
 }
