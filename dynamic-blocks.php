@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Dynamic Blocks Builder
  * Description: Crea bloques dinámicos personalizados desde el administrador.
- * Version: 1.0
- * Author: Entelgy
+ * Version: 2.0
+ * Author: Leonardo Paz - Entelgy
  */
 
 if (!defined('ABSPATH')) exit;
