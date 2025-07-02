@@ -93,6 +93,7 @@ function IconSelector({ value, onChange }) {
       el('strong', null, 'Seleccionado: '),
       typeof value === 'string' && value.startsWith('<svg')
         ? el('span', {
+            className: 'icon-preview',
             dangerouslySetInnerHTML: { __html: value },
             style: { width: '20px', height: '20px', display: 'inline-block', verticalAlign: 'middle' }
           })
@@ -109,7 +110,7 @@ function IconSelector({ value, onChange }) {
     ),
 
     el('div', { className: 'btn-group mb-3' },
-      ['dashicons', 'upload', 'url'].map((t) =>
+      ['dashicons', 'upload'].map((t) =>
         el('button', {
           type: 'button',
           className: `btn btn-outline-secondary ${tab === t ? 'active' : ''}`,
@@ -159,13 +160,7 @@ function IconSelector({ value, onChange }) {
           style: { width: '40px', height: 'auto', display: 'block', marginTop: '5px' }
         })
       )
-    ),
-
-    tab === 'url' && el(TextControl, {
-      label: 'URL del ícono SVG',
-      value: typeof value === 'string' && value.startsWith('http') ? value : '',
-      onChange: onChange
-    })
+    )
   );
 }
 
