@@ -243,3 +243,27 @@ function dbb_generate_uuid() {
 function dbb_generate_indexjs_from_acf($short_name, $title, $category, $icon, $acf_fields) {
     return DBB_Blocks_Utils::generate_indexjs_from_acf($short_name, $title, $category, $icon, $acf_fields);
 }
+
+function dbb_decode_and_sanitize_svg_icon($icon) {
+    if (strpos($icon, 'data:image/svg+xml;base64,') === 0) {
+        $base64 = explode(',', $icon, 2)[1];
+        $decoded = base64_decode($base64);
+        if ($decoded) {
+            // Sanitizar SVG
+            $decoded = preg_replace('/<script.*?>.*?<\\/script>/is', '', $decoded);
+            $decoded = preg_replace('/\\son\\w+=\"[^\"]*\"/i', '', $decoded);
+            $decoded = preg_replace('/(href|xlink:href)\\s*=\\s*\"javascript:[^\"]*\"/i', '', $decoded);
+            $decoded = preg_replace('/<(iframe|object|embed).*?>.*?<\\/\\1>/is', '', $decoded);
+            return $decoded;
+        }
+    }
+    return $icon;
+}
+
+function dbb_validate_svg_icon($svg) {
+    $svg = trim($svg);
+    if (strpos($svg, '<svg') !== 0 || substr($svg, -6) !== '</svg>') {
+        return new WP_Error('invalid_svg', '⚠️ El ícono SVG no está bien formado. Debe comenzar con <svg> y terminar con </svg>.');
+    }
+    return $svg;
+}

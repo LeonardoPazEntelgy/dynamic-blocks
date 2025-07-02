@@ -57,9 +57,10 @@ class DBB_REST_API {
         
         register_rest_route('dynamic-blocks/v1', '/page-blocks/(?P<id>[a-zA-Z0-9-_]+)', [
             'methods'  => 'GET',
+            'permission_callback' => '__return_true',
             'callback' => [$this, 'get_page_blocks'],
         ]);
-    }
+    }   
 
     public function check_admin_permissions() {
         return current_user_can('manage_options');
@@ -69,7 +70,7 @@ class DBB_REST_API {
         $name = sanitize_title($request['blockName']);
         $title = sanitize_text_field($request['blockTitle']);
         $category = sanitize_text_field($request['category']);
-        $icon = sanitize_text_field($request['icon']);
+        $icon = dbb_decode_and_sanitize_svg_icon($request['icon']);
         $template = sanitize_text_field($request['template'] ?? 'default');
         $isChildBlock = !empty($request['isChildBlock']);
         // $dir = DBB_PLUGIN_DIR . "blocks/$name/";
@@ -116,7 +117,22 @@ class DBB_REST_API {
 
                 blocks.registerBlockType('dbb/{$name}', {
                     title: '{$title}',
-                    icon: '{$icon}',
+                    icon: (() => {
+                    const raw = `{$icon}`;
+                    try {
+                        const decoded = raw.startsWith('data:image/svg+xml;base64,')
+                        ? atob(raw.replace(/^data:image\\/svg\\+xml;base64,/, ''))
+                        : raw;
+                        if (decoded.startsWith('<svg')) {
+                        return {
+                            src: () => el('span', { dangerouslySetInnerHTML: { __html: decoded } })
+                        };
+                        }
+                    } catch (e) {
+                        console.warn('Error decoding SVG:', e);
+                    }
+                    return raw;
+                    })(),
                     category: '{$category}',
                     supports: {
                         inserter: true,
@@ -144,7 +160,22 @@ class DBB_REST_API {
 
                 blocks.registerBlockType('dbb/{$name}', {
                     title: '{$title}',
-                    icon: '{$icon}',
+                    icon: (() => {
+                    const raw = `{$icon}`;
+                    try {
+                        const decoded = raw.startsWith('data:image/svg+xml;base64,')
+                        ? atob(raw.replace(/^data:image\\/svg\\+xml;base64,/, ''))
+                        : raw;
+                        if (decoded.startsWith('<svg')) {
+                        return {
+                            src: () => el('span', { dangerouslySetInnerHTML: { __html: decoded } })
+                        };
+                        }
+                    } catch (e) {
+                        console.warn('Error decoding SVG:', e);
+                    }
+                    return raw;
+                    })(),
                     category: '{$category}',
                     edit: function() {
                         const blockProps = useBlockProps();
@@ -237,7 +268,7 @@ class DBB_REST_API {
 
         $title = sanitize_text_field($request['title']);
         $category = sanitize_text_field($request['category']);
-        $icon = sanitize_text_field($request['icon']);
+        $icon = dbb_decode_and_sanitize_svg_icon($request['icon']);
         $template = sanitize_text_field($request['template'] ?? 'default');
         $isChildBlock = !empty($request['isChildBlock']);
 
